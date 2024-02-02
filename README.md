@@ -1,5 +1,7 @@
 # sse-demo
 
+![demo](./demo.gif)
+
 Server-Sent Events (SSE) のデモ
 
 1. サーバーを起動する

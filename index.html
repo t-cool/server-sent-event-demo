@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>SSE Test</title>
+</head>
 <body>
   <h1>Server-Sent Events Test</h1>
   <div id="result"></div>
 
   <script>
-    const evtSource = new EventSource('http://localhost:8000');
+    // EventSource の URL がサーバーサイドのエンドポイントと一致するように修正
+    const evtSource = new EventSource('http://localhost:8000/events');
+    
     evtSource.onmessage = function(event) {
       const newElement = document.createElement("p");
-      newElement.textContent = "New message: " + event.data;
+      newElement.textContent = "New message: " + event.data; // 受信したデータを表示
       document.getElementById("result").appendChild(newElement);
+    };
+
+    // 接続エラーをハンドル
+    evtSource.onerror = function(err) {
+      console.error("EventSource failed:", err);
+      evtSource.close(); // エラー時に接続を閉じる
     };
   </script>
 </body>

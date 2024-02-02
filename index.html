@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Server-Sent Events Test</h1>
+  <div id="result"></div>
+
+  <script>
+    const evtSource = new EventSource('http://localhost:8000');
+    evtSource.onmessage = function(event) {
+      const newElement = document.createElement("p");
+      newElement.textContent = "New message: " + event.data;
+      document.getElementById("result").appendChild(newElement);
+    };
+  </script>
+</body>
+</html>
